@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import "./App.css";
-import Card from "./UI/Card";
 import AddUsers from "./Users/AddUsers";
 import UsersList from "./Users/UsersList";
 
@@ -15,10 +14,10 @@ function App() {
     });
   };
   return (
-    <div>
+    <Fragment>
       <AddUsers onAddUsers={addDataHendler} />
       <UsersList listusers={usersList} />
-    </div>
+    </Fragment>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import ErrorModal from "../UI/ErrorModal";
@@ -38,7 +38,7 @@ const AddUsers = (props) => {
     setError(null);
   };
   return (
-    <div>
+    <Fragment>
       {error && (
         <ErrorModal
           title={error.title}
@@ -65,7 +65,7 @@ const AddUsers = (props) => {
           <Button type="submit">Ajoutez un</Button>
         </form>
       </Card>
-    </div>
+    </Fragment>
   );
 };
 export default AddUsers;
