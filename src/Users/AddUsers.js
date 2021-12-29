@@ -1,21 +1,17 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useRef } from "react";
 import Button from "../UI/Button";
 import Card from "../UI/Card";
 import ErrorModal from "../UI/ErrorModal";
 import classes from "./AddUsers.module.css";
 
 const AddUsers = (props) => {
-  const [enteredAchat, setName] = useState("");
-  const [enteredPrix, setAge] = useState("");
+  const articleName = useRef();
+  const articlePrix = useRef();
   const [error, setError] = useState();
-  const addNameHandler = (event) => {
-    setName(event.target.value);
-  };
-  const addAgeHandler = (event) => {
-    setAge(event.target.value);
-  };
   const addInfoHandler = (event) => {
     event.preventDefault();
+    const enteredAchat = articleName.current.value;
+    const enteredPrix = articlePrix.current.value;
     if (enteredAchat.trim().length === 0 || enteredPrix.trim().length === 0) {
       setError({
         title: "Erreur le Nom d'achat",
@@ -31,8 +27,8 @@ const AddUsers = (props) => {
       return;
     }
     props.onAddUsers(enteredAchat, enteredPrix);
-    setName("");
-    setAge("");
+    articleName.current.value = "";
+    articlePrix.current.value = "";
   };
   const errorHandler = () => {
     setError(null);
@@ -49,19 +45,9 @@ const AddUsers = (props) => {
       <Card className={classes.input}>
         <form onSubmit={addInfoHandler}>
           <label htmlFor="username">Achat</label>
-          <input
-            id="username"
-            type="text"
-            value={enteredAchat}
-            onChange={addNameHandler}
-          ></input>
+          <input id="username" type="text" ref={articleName}></input>
           <label htmlFor="age">Prix</label>
-          <input
-            id="age"
-            type="number"
-            value={enteredPrix}
-            onChange={addAgeHandler}
-          ></input>
+          <input id="age" type="number" ref={articlePrix}></input>
           <Button type="submit">Ajoutez un</Button>
         </form>
       </Card>
